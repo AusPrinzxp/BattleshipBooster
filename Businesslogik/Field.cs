@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Businesslogik
 {
-    class Field
+    public class Field
     {
+        public bool IsBoat { get; set; }
+        public string Row { get; set; }
+        public string Column { get; set; }
     }
 }
