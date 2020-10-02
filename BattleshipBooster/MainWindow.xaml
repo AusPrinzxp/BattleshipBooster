@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:BattleshipBooster"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Main" Height="700" Width="1300"
+        Title="Main" Height="800" Width="1300"
+        MinHeight="800" MinWidth="1300"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -28,13 +29,13 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Width="90" Height="40">aölsdjkf</Button>
+            <Button Name="GenerateNew" Grid.Row="0" Width="150" Height="50" Click="GenerateNew_Click">Generate New</Button>
             <Button Grid.Row="2" Width="90" Height="40">aölsdjkf</Button>
             <Button Grid.Row="3" Width="90" Height="40">aölsdjkf</Button>
         </Grid>
 
-        <Grid Grid.Column="1" Name="PlayFieldGrid">
-            
+        <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30">
+            <StackPanel Name="PlayFieldPanel"  HorizontalAlignment="Center" VerticalAlignment="Center"></StackPanel>
         </Grid>
     </Grid>
 </Window>

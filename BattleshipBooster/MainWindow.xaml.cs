@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Businesslogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace BattleshipBooster
 {
@@ -11,22 +13,48 @@ namespace BattleshipBooster
   /// </summary>
   public partial class MainWindow : Window
   {
+        PlayField playField = new PlayField(6);
+
         public MainWindow()
         {
             InitializeComponent();
 
-            CreateGrid(6);
+            playField.Generate();
+            CreatePlayFieldElements();
         }
 
-        public void CreateGrid(int size)
+        public void CreatePlayFieldElements()
         {
-            PlayFieldGrid.ShowGridLines = true;
+            PlayFieldPanel.Children.Clear();
 
-            for (int i = 0; i < size; i++)
+            for (int y = 0; y < playField.Fields.GetLength(0); y++)
             {
-                PlayFieldGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                PlayFieldGrid.RowDefinitions.Add(new RowDefinition());
+                StackPanel panel = new StackPanel();
+                panel.Orientation = Orientation.Horizontal;
+                PlayFieldPanel.Children.Add(panel);
+
+                for (int x = 0; x < playField.Fields.GetLength(1); x++)
+                {
+                    Label label = new Label();
+                    label.Width = 100;
+                    label.Height = 100;
+                    label.BorderThickness = new Thickness(3);
+                    label.BorderBrush = Brushes.DarkGray;
+
+                    if (!playField.Fields[y, x].IsBoat)
+                    {
+                        label.Background = playField.Fields[y, x].IsBoat ? Brushes.Black : Brushes.LightSkyBlue;
+                    }
+
+                    panel.Children.Add(label);
+                }
             }
+        }
+
+        private void GenerateNew_Click(object sender, RoutedEventArgs e)
+        {
+            playField.Generate();
+            CreatePlayFieldElements();
         }
     }
 }
