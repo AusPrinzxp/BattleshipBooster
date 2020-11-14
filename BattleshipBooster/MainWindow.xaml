@@ -21,7 +21,7 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Name="SettingsGrid">
+        <Grid Grid.Column="0" Name="SettingsGrid" Background="LightGray">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -30,8 +30,16 @@
             </Grid.RowDefinitions>
 
             <Button Name="GenerateNew" Grid.Row="0" Width="150" Height="50" Click="GenerateNew_Click">Generate New</Button>
-            <Button Grid.Row="2" Width="90" Height="40">aölsdjkf</Button>
-            <Button Grid.Row="3" Width="90" Height="40">aölsdjkf</Button>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
+                <Label FontSize="20" Margin="0 0 0 10" HorizontalAlignment="Center">Play field size</Label>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="SmallSize" Click="SmallSize_Click">Small</Button>
+                    <Button Name="MeduimSize" Click="MeduimSize_Click">Medium</Button>
+                    <Button Name="LargeSize" Click="LargeSize_Click">Large</Button>
+                </StackPanel>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30">

@@ -36,7 +36,7 @@ namespace BattleshipBooster
 
             alphabetIndexPanel.Children.Add(alphaLabel);
 
-            for (int x = 0; x < playField.fields.GetLength(1); x++)
+            for (int x = 0; x < playField.Size; x++)
             {
                 alphaLabel = new Label();
                 alphaLabel.Width = 100;
@@ -49,7 +49,7 @@ namespace BattleshipBooster
                 alphabetIndexPanel.Children.Add(alphaLabel);
             }
 
-            for (int y = 0; y < playField.fields.GetLength(0); y++)
+            for (int y = 0; y < playField.Size; y++)
             {
                 StackPanel row = new StackPanel();
                 row.Orientation = Orientation.Horizontal;
@@ -65,7 +65,7 @@ namespace BattleshipBooster
 
                 row.Children.Add(numberLabel);
 
-                for (int x = 0; x < playField.fields.GetLength(1); x++)
+                for (int x = 0; x < playField.Size; x++)
                 {
                     Label label = new Label();
                     label.Width = 100;
@@ -73,9 +73,9 @@ namespace BattleshipBooster
                     label.BorderThickness = new Thickness(3);
                     label.BorderBrush = Brushes.DarkGray;
 
-                    if (!playField.fields[y, x].isBoat)
+                    if (!playField.Fields[y, x].IsBoat)
                     {
-                        label.Background = playField.fields[y, x].isBoat ? Brushes.Black : Brushes.LightSkyBlue;
+                        label.Background = playField.Fields[y, x].IsBoat ? Brushes.Black : Brushes.LightSkyBlue;
                     }
 
                     row.Children.Add(label);
@@ -88,5 +88,26 @@ namespace BattleshipBooster
             playField.Generate();
             DrawField();
         }
-    }
+
+		private void SmallSize_Click(object sender, RoutedEventArgs e)
+		{
+            playField = new PlayField(5);
+            playField.Generate();
+            DrawField();
+        }
+
+		private void MeduimSize_Click(object sender, RoutedEventArgs e)
+		{
+            playField = new PlayField(6);
+            playField.Generate();
+            DrawField();
+        }
+
+		private void LargeSize_Click(object sender, RoutedEventArgs e)
+		{
+            playField = new PlayField(7);
+            playField.Generate();
+            DrawField();
+        }
+	}
 }

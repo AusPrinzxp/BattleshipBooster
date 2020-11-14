@@ -5,76 +5,71 @@ namespace Businesslogic
 {
     public class PlayField
     {
-        public Field[,] fields { get; set; }
-        public int size { get; set; }
+        public Field[,] Fields { get; set; }
+        public int Size { get; set; }
 
         public PlayField(int size)
         {
-            this.size = size;
-            this.fields = new Field[size, size];
+            this.Size = size;
+            this.Fields = new Field[size, size];
 
 			Generate();
 		}
 
         public void Generate()
         {
-            ResetPlayField();
+            Reset();
 
 			foreach (Boat boat in GetBoatsFromConfig())
 			{
-				StartPosition[] possibleStartPositions = GetPossibleBoatStartPositions(boat.length);
+				StartPosition[] possibleStartPositions = GetPossibleBoatStartPositions(boat.Length);
 
 				if (possibleStartPositions.Length == 0)
 				{
-					throw new Exception("Generation failed");
+                    return;
 			    } else
 				{
                     StartPosition placePosition = possibleStartPositions[new Random().Next(0, possibleStartPositions.Length)];
 
-                    // place boat => extract into boat class: boat.Place(fields)
-
-                    if (placePosition.isHorizontal)
-					{
-                        for (int i = 0; i < boat.length; i++)
-					    {
-                            fields[placePosition.x + i, placePosition.y].isBoat = true;
-					    }
-                    } else
-					{
-                        for (int i = 0; i < boat.length; i++)
-                        {
-                            fields[placePosition.x, placePosition.y + i].isBoat = true;
-                        }
-                    }
+                    boat.Place(Fields, placePosition);
 				}
 			}
 		}
 
-        private Boat[] GetBoatsFromConfig()
+        private void Reset()
 		{
-			// placeholder: later read config out of json file depending on the PlayFieldSize
-			return new Boat[] { new Boat(3), new Boat(2), new Boat(2), new Boat(1), new Boat(1) };
-		}
-
-        private void ResetPlayField()
-		{
-            for (int col = 0; col < fields.GetLength(0); col++)
+            for (int col = 0; col < Size; col++)
             {
-                for (int row = 0; row < fields.GetLength(1); row++)
+                for (int row = 0; row < Size; row++)
                 {
-                    fields[col, row] = new Field(false);
+                    Fields[col, row] = new Field(false);
                 }
             }
         }
+
+        private Boat[] GetBoatsFromConfig()
+		{
+			// placeholder: later read config out of json file depending on the PlayFieldSize
+            if (Size == 5)
+			{
+                return new Boat[] { new Boat(3), new Boat(2), new Boat(1), new Boat(1) };
+            } else if (Size == 6)
+			{
+			    return new Boat[] { new Boat(3), new Boat(2), new Boat(2), new Boat(1), new Boat(1) };
+			} else
+			{
+                return new Boat[] { new Boat(3), new Boat(2), new Boat(2), new Boat(2), new Boat(1), new Boat(1), new Boat(1) };
+            }
+		}
 
 		private StartPosition[] GetPossibleBoatStartPositions(int boatLength)
         {
             List<StartPosition> positions = new List<StartPosition>();
 
             // all horizontal positions
-            for (int col = 0; col < fields.GetLength(0) - boatLength + 1; col++)
+            for (int col = 0; col < Size - boatLength + 1; col++)
             {
-                for (int row = 0; row < fields.GetLength(1); row++)
+                for (int row = 0; row < Size; row++)
                 {
                     StartPosition startPosition = new StartPosition(col, row, true);
                     if (IsPossiblePosition(startPosition, boatLength))
@@ -84,12 +79,10 @@ namespace Businesslogic
                 }
             }
 
-            // !!! Doubled code => extract into seperate method !!!
-
             // all vertical positions
-            for (int col = 0; col < fields.GetLength(0); col++)
+            for (int col = 0; col < Size; col++)
             {
-                for (int row = 0; row < fields.GetLength(1) - boatLength + 1; row++)
+                for (int row = 0; row < Size - boatLength + 1; row++)
                 {
                     StartPosition startPosition = new StartPosition(col, row, false);
                     if (IsPossiblePosition(startPosition, boatLength))
@@ -104,28 +97,63 @@ namespace Businesslogic
 
         private bool IsPossiblePosition(StartPosition checkPosition, int boatLength)
         {
-            bool isPossible = true;
-            // for boatlenght check pos
-            // if horizontal or not
-            // check if is not boat
             for (int i = 0; i < boatLength; i++)
 			{
-                if (checkPosition.isHorizontal)
+                int xPos = checkPosition.X + i * Convert.ToInt32(checkPosition.IsHorizontal);
+                int yPos = checkPosition.Y + i * Convert.ToInt32(!checkPosition.IsHorizontal);
+
+                if (Fields[xPos, yPos].IsBoat)
 				{
-                    if (fields[checkPosition.x + i, checkPosition.y].isBoat)
-					{
-                        return false;
-					}
-				} else
+                    return false;
+				}
+
+                if (!(checkPosition.IsHorizontal ? HasGapsHorizontally(xPos, yPos, i == 0, i == boatLength - 1) : HasGapsVertically(xPos, yPos, i == 0, i == boatLength - 1)))
 				{
-                    if (fields[checkPosition.x, checkPosition.y + i].isBoat)
-					{
-                        return false;
-					}
+                    return false;
 				}
 			}
 
-            return isPossible;
+            return true;
+        }
+
+        private bool HasGapsHorizontally(int x, int y, bool isStart, bool isEnd)
+        {
+            if (y < Size -1 && Fields[x, y + 1].IsBoat || y > 0 && Fields[x, y - 1].IsBoat)
+			{
+                return false;
+			}
+
+            if (x > 0 && isStart && (Fields[x - 1, y].IsBoat || y < Size -1 && Fields[x - 1, y + 1].IsBoat || y > 0 && Fields[x - 1, y - 1].IsBoat))
+			{
+                return false;
+			}
+
+            if (x < Size -1 && isEnd && (Fields[x + 1, y].IsBoat || y < Size -1 && Fields[x + 1, y + 1].IsBoat || y > 0 && Fields[x + 1, y - 1].IsBoat))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool HasGapsVertically(int x, int y, bool isStart, bool isEnd)
+        {
+            if (x < Size -1 && Fields[x + 1, y].IsBoat || x > 0 && Fields[x - 1, y].IsBoat)
+            {
+                return false;
+            }
+
+            if (y > 0 && isStart && (Fields[x, y - 1].IsBoat || x < Size -1 && Fields[x + 1, y - 1].IsBoat || x > 0 && Fields[x - 1, y - 1].IsBoat))
+            {
+                return false;
+            }
+
+            if (y < Size -1 && isEnd && (Fields[x, y + 1].IsBoat || x < Size -1 && Fields[x + 1, y + 1].IsBoat || x > 0 && Fields[x - 1, y + 1].IsBoat))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -6,15 +6,15 @@ namespace Businesslogic
 {
     public class StartPosition
     {
-        public int x { get; set; }
-        public int y { get; set; }
-        public bool isHorizontal { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public bool IsHorizontal { get; set; }
 
         public StartPosition(int x, int y, bool isHorizontal)
         {
-            this.x = x;
-            this.y = y;
-            this.isHorizontal = isHorizontal;
+            this.X = x;
+            this.Y = y;
+            this.IsHorizontal = isHorizontal;
         }
     }
 }

@@ -6,11 +6,11 @@ namespace Businesslogic
 {
     public class Field
     {
-        public bool isBoat { get; set; }
+        public bool IsBoat { get; set; }
 
         public Field(bool isBoat)
         {
-            this.isBoat = isBoat;
+            this.IsBoat = isBoat;
         }
     }
 }
