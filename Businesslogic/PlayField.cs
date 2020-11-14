@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Businesslogic
 {
@@ -15,15 +16,46 @@ namespace Businesslogic
 
         public void Generate()
         {
-            for (int y = 0; y < Fields.GetLength(0); y++)
-            {
-                for (int x = 0; x < Fields.GetLength(1); x++)
-                {
-                    bool isBoat = new Random().Next(0, 2) == 1;
+            /*
+             *  for (let boat of boatsOfConfig) {
+             *      StartPosition[] possibleStartPositions = GetPossibleBoatStartPositions(boat.length);
+             *      
+             *      if (possiblePositions.length == 0) {
+             *          throw new Error("Bitte es gaaad ned");
+             *          return;
+             *      }
+             *      
+             *      
+             *  }
+             */
+        }
 
-                    Fields[y, x] = new Field(isBoat);
-                }
-            }
+        private StartPosition[] GetPossibleBoatStartPositions(int boatLength)
+        {
+            List<StartPosition> positions = new List<StartPosition>();
+
+            /*
+             *  // all horizontal boats
+             *  for (let column of Fields.GetLength(0) - boatLength + 1) {
+             *      for (let row of Fields.GetLength(1)) {
+             *          IsPossiblePosition(new StartPosition(column, row, true));
+             *      }
+             *  }
+             *  
+             *  // all vertical boats
+             *  for (let columns of Fields.GetLength(0)) {
+             *      for (let field of Fields.GetLength(1) - boatLength + 1) {
+             *  ...
+             *  
+             *  the same loop as above => extract into seperate method
+             */
+
+            return positions.ToArray();
+        }
+
+        private bool IsPossiblePosition(StartPosition checkPosition)
+        {
+            return false;
         }
     }
 }
