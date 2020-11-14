@@ -16,7 +16,6 @@ namespace BattleshipBooster
         {
             InitializeComponent();
 
-            playField.Generate();
             DrawField();
         }
 
@@ -37,7 +36,7 @@ namespace BattleshipBooster
 
             alphabetIndexPanel.Children.Add(alphaLabel);
 
-            for (int x = 0; x < playField.Fields.GetLength(1); x++)
+            for (int x = 0; x < playField.fields.GetLength(1); x++)
             {
                 alphaLabel = new Label();
                 alphaLabel.Width = 100;
@@ -50,7 +49,7 @@ namespace BattleshipBooster
                 alphabetIndexPanel.Children.Add(alphaLabel);
             }
 
-            for (int y = 0; y < playField.Fields.GetLength(0); y++)
+            for (int y = 0; y < playField.fields.GetLength(0); y++)
             {
                 StackPanel row = new StackPanel();
                 row.Orientation = Orientation.Horizontal;
@@ -66,7 +65,7 @@ namespace BattleshipBooster
 
                 row.Children.Add(numberLabel);
 
-                for (int x = 0; x < playField.Fields.GetLength(1); x++)
+                for (int x = 0; x < playField.fields.GetLength(1); x++)
                 {
                     Label label = new Label();
                     label.Width = 100;
@@ -74,9 +73,9 @@ namespace BattleshipBooster
                     label.BorderThickness = new Thickness(3);
                     label.BorderBrush = Brushes.DarkGray;
 
-                    if (!playField.Fields[y, x].IsBoat)
+                    if (!playField.fields[y, x].isBoat)
                     {
-                        label.Background = playField.Fields[y, x].IsBoat ? Brushes.Black : Brushes.LightSkyBlue;
+                        label.Background = playField.fields[y, x].isBoat ? Brushes.Black : Brushes.LightSkyBlue;
                     }
 
                     row.Children.Add(label);
