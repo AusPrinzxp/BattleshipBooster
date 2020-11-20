@@ -60,7 +60,7 @@ namespace BattleshipBooster
             CreatePlayFieldElements();
         }
 
-        private void SaveRiddleAsPNG(Window view)
+        private void SaveRiddleAsPNG(Grid view)
         {
             Size size = new Size(view.ActualWidth, view.ActualHeight);
 
@@ -93,7 +93,7 @@ namespace BattleshipBooster
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             Window mainWindow = Application.Current.MainWindow;
-            this.SaveRiddleAsPNG(mainWindow);
+            this.SaveRiddleAsPNG(PlayFieldGrid);
         }
     }
 }
