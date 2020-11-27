@@ -113,20 +113,20 @@ namespace BattleshipBooster
             DrawField();
         }
 
-        private void SaveRiddleAsPNG(Grid view)
+        private void SaveRiddleAsPNG(Grid grid)
         {
-            Size size = new Size(view.ActualWidth, view.ActualHeight);
+            Size size = new Size(grid.ActualWidth, grid.ActualHeight);
 
-            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, PixelFormats.Pbgra32);
+            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, PixelFormats.Pbgra32);
 
             DrawingVisual drawingvisual = new DrawingVisual();
-            using (DrawingContext context = drawingvisual.RenderOpen())
+            using (DrawingContext drawingContext = drawingvisual.RenderOpen())
             {
-                context.DrawRectangle(new VisualBrush(view), null, new Rect(new Point(), size));
-                context.Close();
+                drawingContext.DrawRectangle(new VisualBrush(grid), null, new Rect(new Point(), size));
+                drawingContext.Close();
             }
 
-            result.Render(drawingvisual);
+            renderTargetBitmap.Render(drawingvisual);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG Image|*.png";
@@ -134,12 +134,12 @@ namespace BattleshipBooster
             saveFileDialog.FileName = "Riddle";
             saveFileDialog.ShowDialog();
 
-            PngBitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(result));
+            PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
 
             using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
             {
-                encoder.Save(fs);
+                bitmapEncoder.Save(fs);
             }
         }
 
