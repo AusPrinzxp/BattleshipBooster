@@ -1,5 +1,6 @@
 ﻿using Businesslogic;
 using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,18 +71,21 @@ namespace BattleshipBooster
 
                 for (int x = 0; x < playField.Size; x++)
                 {
-                    Label label = new Label();
-                    label.Width = 100;
-                    label.Height = 100;
-                    label.BorderThickness = new Thickness(3);
-                    label.BorderBrush = Brushes.DarkGray;
+                    Image image = new Image();
+                    image.Width = 100;
+                    image.Height = 100;
 
-                    if (!playField.Fields[y, x].IsBoat)
+                    if (playField.Fields[x, y].IsBoat)
                     {
-                        label.Background = playField.Fields[y, x].IsBoat ? Brushes.Black : Brushes.LightSkyBlue;
+                        image.Source = new BitmapImage(new Uri(@"Icons/BoatSingle.png", UriKind.Relative));
+                    } else
+                    {
+                        int random = new Random().Next(4);
+                        string imagePath = random == 0 ? @"Icons/Wave.png" : @"Icons/Water.png";
+                        image.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                     }
 
-                    row.Children.Add(label);
+                    row.Children.Add(image);
                 }
             }
         }
@@ -131,7 +135,9 @@ namespace BattleshipBooster
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG Image|*.png";
             saveFileDialog.Title = "Save the Riddle";
-            saveFileDialog.FileName = "Riddle";
+
+            string timeNow = DateTime.Now.ToBinary().ToString();
+            saveFileDialog.FileName = "Riddle-" + timeNow.Substring(timeNow.Length - 6);
             saveFileDialog.ShowDialog();
 
             PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();

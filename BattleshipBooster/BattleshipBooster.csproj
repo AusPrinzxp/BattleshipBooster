@@ -7,11 +7,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\BoatEndDown.png" />
+    <None Remove="Icons\BoatEndLeft.png" />
+    <None Remove="Icons\BoatEndRight.png" />
+    <None Remove="Icons\BoatEndUp.png" />
+    <None Remove="Icons\BoatMiddle.png" />
+    <None Remove="Icons\BoatSingle.png" />
+    <None Remove="Icons\icon.ico" />
+    <None Remove="Icons\Water.png" />
+    <None Remove="Icons\Wave.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Businesslogic\Businesslogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\BoatEndRight.png" />
+    <Resource Include="Icons\BoatEndLeft.png" />
+    <Resource Include="Icons\BoatEndDown.png" />
+    <Resource Include="Icons\BoatEndUp.png" />
+    <Resource Include="Icons\BoatMiddle.png" />
+    <Resource Include="Icons\icon.ico" />
+    <Resource Include="Icons\BoatSingle.png" />
+    <Resource Include="Icons\Water.png" />
+    <Resource Include="Icons\Wave.png" />
   </ItemGroup>
 
 </Project>
