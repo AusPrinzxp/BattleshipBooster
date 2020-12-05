@@ -1,12 +1,14 @@
-﻿<Window x:Class="BattleshipBooster.MainWindow"
+﻿<Window x:Class="BattleshipBooster.Views.Main"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BattleshipBooster"
+        xmlns:local="clr-namespace:BattleshipBooster.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Main" Height="800" Width="1300"
+        Title="Battleship Booster" Height="800" Width="1300"
         MinHeight="800" MinWidth="1300"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -45,7 +47,8 @@
         </Grid>
 
         <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30">
-            <StackPanel Name="PlayFieldPanel"  HorizontalAlignment="Center" VerticalAlignment="Center"></StackPanel>
+            <StackPanel Name="PlayFieldPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
