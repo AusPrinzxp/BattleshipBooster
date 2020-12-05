@@ -22,10 +22,18 @@ namespace BattleshipBooster.ViewModels
             set => SetProperty(ref _playField, value);
         }
 
+        private bool _showSolution;
+        public bool ShowSolution
+		{
+            get => _showSolution;
+            set => SetProperty(ref _showSolution, value);
+		}
+
         public MainViewModel(Generator generator, Export export)
         {
             this.generator = generator;
             this.export = export;
+            this.ShowSolution = false;
             ResizePlayField(6);
         }
 
@@ -42,7 +50,7 @@ namespace BattleshipBooster.ViewModels
 
         public void Export(Grid grid)
 		{
-            export.SaveAsPNG(grid);
+            export.SaveAsPNG(grid, ShowSolution, PlayField.Id);
 		}
     }
 }

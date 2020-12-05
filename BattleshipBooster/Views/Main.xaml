@@ -34,7 +34,11 @@
             <Button Name="GenerateNew" Grid.Row="0" Width="150" Height="50" Click="GenerateNew_Click">Generate New</Button>
 
             <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
-                <Label FontSize="20" Margin="0 0 0 10" HorizontalAlignment="Center">Play field size</Label>
+                <Label FontSize="20" HorizontalAlignment="Center" Margin="0 5 0 5">Show solution</Label>
+
+                <ToggleButton Grid.Row="1" IsChecked="{Binding ShowSolution}" Name="ShowSolutionToggle" Click="ShowSolutionToggle_Click"></ToggleButton>
+
+                <Label FontSize="20" Margin="0 15 0 10" HorizontalAlignment="Center">Play field size</Label>
 
                 <StackPanel Orientation="Horizontal">
                     <Button Name="SmallSize" Click="SmallSize_Click">Small</Button>
@@ -43,7 +47,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <Button Name="Save" Grid.Row="2" Width="150" Height="50" Click="Save_Click">Save</Button>
+            <Button Name="Save" Grid.Row="3" Width="150" Height="50" Click="Save_Click">Save</Button>
         </Grid>
 
         <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30">

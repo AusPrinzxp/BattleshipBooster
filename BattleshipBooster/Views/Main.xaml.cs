@@ -38,8 +38,12 @@ namespace BattleshipBooster.Views
                         Width = 100,
                         Height = 100,
                         Source = new BitmapImage(new Uri(@$"../Icons/{playField.Fields[x, y].Icon}.png", UriKind.Relative)),
-                        Opacity = playField.Fields[x, y].IsVisible ? 1 : 0
 					};
+
+                    if (!(DataContext as MainViewModel).ShowSolution)
+					{
+                        image.Opacity = playField.Fields[x, y].IsVisible ? 1 : 0;
+                    }
 
 					Border field = new Border
 					{
@@ -81,5 +85,10 @@ namespace BattleshipBooster.Views
         {
             (DataContext as MainViewModel).Export(PlayFieldGrid);
         }
-    }
+
+		private void ShowSolutionToggle_Click(object sender, RoutedEventArgs e)
+		{
+            DrawField();
+		}
+	}
 }

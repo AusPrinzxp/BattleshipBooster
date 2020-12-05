@@ -12,7 +12,7 @@ namespace BattleshipBooster.Services
 {
 	public class Export
 	{
-        public void SaveAsPNG(Grid grid)
+        public void SaveAsPNG(Grid grid, bool isSolution, string playFieldId)
         {
             Size size = new Size(grid.ActualWidth, grid.ActualHeight);
 
@@ -29,10 +29,10 @@ namespace BattleshipBooster.Services
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG Image|*.png";
-            saveFileDialog.Title = "Save the Riddle";
 
-            string timeNow = DateTime.Now.ToBinary().ToString();
-            saveFileDialog.FileName = "Riddle-" + timeNow.Substring(timeNow.Length - 6);
+            string saveType = isSolution ? "Solution" : "Riddle";
+            saveFileDialog.Title = $"Save the {saveType}";
+            saveFileDialog.FileName = $"{saveType}-{playFieldId}";
 
             saveFileDialog.ShowDialog();
 
