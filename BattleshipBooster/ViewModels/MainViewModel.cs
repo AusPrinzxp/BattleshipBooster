@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Controls;
 
 namespace BattleshipBooster.ViewModels
 {
@@ -12,6 +13,7 @@ namespace BattleshipBooster.ViewModels
     {
         // services
         private Generator generator;
+        private Export export;
 
         private PlayField _playField;
         public PlayField PlayField
@@ -20,9 +22,10 @@ namespace BattleshipBooster.ViewModels
             set => SetProperty(ref _playField, value);
         }
 
-        public MainViewModel(Generator generator)
+        public MainViewModel(Generator generator, Export export)
         {
             this.generator = generator;
+            this.export = export;
             ResizePlayField(6);
         }
 
@@ -36,5 +39,10 @@ namespace BattleshipBooster.ViewModels
 		{
             PlayField.Fields = generator.Generate(PlayField.Size);
         }
+
+        public void Export(Grid grid)
+		{
+            export.SaveAsPNG(grid);
+		}
     }
 }

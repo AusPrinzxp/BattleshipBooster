@@ -1,11 +1,8 @@
 ﻿using BattleshipBooster.Models;
 using BattleshipBooster.ViewModels;
-using Microsoft.Win32;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace BattleshipBooster.Views
 {
@@ -20,7 +17,7 @@ namespace BattleshipBooster.Views
 			DrawField();
 		}
 
-        public void DrawField()
+        private void DrawField()
         {
             PlayField playField = (DataContext as MainViewModel).PlayField;
 
@@ -74,39 +71,9 @@ namespace BattleshipBooster.Views
             DrawField();
         }
 
-        private void SaveRiddleAsPNG(Grid grid)
-        {
-            Size size = new Size(grid.ActualWidth, grid.ActualHeight);
-
-            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, PixelFormats.Pbgra32);
-
-            DrawingVisual drawingvisual = new DrawingVisual();
-            using (DrawingContext drawingContext = drawingvisual.RenderOpen())
-            {
-                drawingContext.DrawRectangle(new VisualBrush(grid), null, new Rect(new Point(), size));
-                drawingContext.Close();
-            }
-
-            renderTargetBitmap.Render(drawingvisual);
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PNG Image|*.png";
-            saveFileDialog.Title = "Save the Riddle";
-            saveFileDialog.FileName = "Riddle";
-            saveFileDialog.ShowDialog();
-
-            PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
-            bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-
-            using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
-            {
-                bitmapEncoder.Save(fs);
-            }
-        }
-
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            this.SaveRiddleAsPNG(PlayFieldGrid);
+            (DataContext as MainViewModel).Export(PlayFieldGrid);
         }
     }
 }
