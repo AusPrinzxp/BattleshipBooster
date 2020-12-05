@@ -52,7 +52,10 @@ namespace BattleshipBooster.Services
             {
                 for (int row = 0; row < size; row++)
                 {
-                    fields[col, row] = new Field(false);
+                    bool isWave = new Random().Next(4) == 0;
+                    string icon = isWave ? "Wave" : "Water";
+
+                    fields[col, row] = new Field(icon, false);
                 }
             }
 

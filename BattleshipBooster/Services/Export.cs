@@ -30,7 +30,10 @@ namespace BattleshipBooster.Services
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG Image|*.png";
             saveFileDialog.Title = "Save the Riddle";
-            saveFileDialog.FileName = "Riddle";
+
+            string timeNow = DateTime.Now.ToBinary().ToString();
+            saveFileDialog.FileName = "Riddle-" + timeNow.Substring(timeNow.Length - 6);
+
             saveFileDialog.ShowDialog();
 
             PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();

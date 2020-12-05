@@ -7,9 +7,11 @@ namespace BattleshipBooster.Models
 	public class Field
 	{
 		public bool IsBoat { get; set; }
+		public string Icon { get; set; }
 
-		public Field(bool isBoat = false)
+		public Field(string icon, bool isBoat = false)
 		{
+			Icon = icon;
 			IsBoat = isBoat;
 		}
 	}

@@ -1,8 +1,9 @@
 ﻿using BattleshipBooster.Models;
 using BattleshipBooster.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BattleshipBooster.Views
 {
@@ -31,18 +32,12 @@ namespace BattleshipBooster.Views
 
                 for (int x = 0; x < playField.Size; x++)
                 {
-                    Label label = new Label();
-                    label.Width = 100;
-                    label.Height = 100;
-                    label.BorderThickness = new Thickness(3);
-                    label.BorderBrush = Brushes.DarkGray;
+                    Image image = new Image();
+                    image.Width = 100;
+                    image.Height = 100;
+                    image.Source = new BitmapImage(new Uri(@$"../Icons/{playField.Fields[x, y].Icon}.png", UriKind.Relative));
 
-                    if (!playField.Fields[y, x].IsBoat)
-                    {
-                        label.Background = playField.Fields[y, x].IsBoat ? Brushes.Black : Brushes.LightSkyBlue;
-                    }
-
-                    row.Children.Add(label);
+                    row.Children.Add(image);
                 }
             }
         }

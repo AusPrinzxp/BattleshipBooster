@@ -28,7 +28,10 @@ namespace BattleshipBooster.Models
 		{
 			for (int i = 0; i < this.Length; i++)
 			{
-				fields[placePosition.X + i, placePosition.Y].IsBoat = true;
+				Field field = fields[placePosition.X + i, placePosition.Y];
+				field.IsBoat = true;
+
+				SetFieldIcon(field, false, i == 0, i == (this.Length - 1));
 			}
 		}
 
@@ -36,7 +39,28 @@ namespace BattleshipBooster.Models
 		{
 			for (int i = 0; i < this.Length; i++)
 			{
-				fields[placePosition.X, placePosition.Y + i].IsBoat = true;
+				Field field = fields[placePosition.X, placePosition.Y + i];
+				field.IsBoat = true;
+
+				SetFieldIcon(field, true, i == 0, i == (this.Length -1));
+			}
+		}
+
+		private void SetFieldIcon(Field field, bool isVertical, bool isBoatStart, bool isBoatEnd)
+		{
+			if (this.Length == 1)
+			{
+				field.Icon = "BoatSingle";
+			}
+			else if (isBoatStart) {
+				field.Icon = isVertical ? "BoatEndUp" : "BoatEndLeft";
+			}
+			else if (isBoatEnd)
+			{
+				field.Icon = isVertical ? "BoatEndDown" : "BoatEndRight";
+			}
+			else {
+				field.Icon = "BoatMiddle";
 			}
 		}
 	}

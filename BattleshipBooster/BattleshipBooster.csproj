@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,8 @@
     <None Remove="Icons\icon.ico" />
     <None Remove="Icons\Water.png" />
     <None Remove="Icons\Wave.png" />
+    <None Remove="Views\Main.xaml.cs~RF378b2513.TMP" />
+    <None Remove="Views\Main.xaml.cs~RF3796cf86.TMP" />
   </ItemGroup>
 
   <ItemGroup>
