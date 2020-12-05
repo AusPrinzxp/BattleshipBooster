@@ -54,8 +54,9 @@ namespace BattleshipBooster.Services
                 {
                     bool isWave = new Random().Next(4) == 0;
                     string icon = isWave ? "Wave" : "Water";
+                    bool isVisible = new Random().Next(6) == 0;
 
-                    fields[col, row] = new Field(icon, false);
+                    fields[col, row] = new Field(icon, isVisible, false);
                 }
             }
 

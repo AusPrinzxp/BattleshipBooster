@@ -14,7 +14,6 @@
     <None Remove="Icons\BoatEndUp.png" />
     <None Remove="Icons\BoatMiddle.png" />
     <None Remove="Icons\BoatSingle.png" />
-    <None Remove="Icons\icon.ico" />
     <None Remove="Icons\Water.png" />
     <None Remove="Icons\Wave.png" />
     <None Remove="Views\Main.xaml.cs~RF378b2513.TMP" />
@@ -37,7 +36,6 @@
     <Resource Include="Icons\BoatEndDown.png" />
     <Resource Include="Icons\BoatEndUp.png" />
     <Resource Include="Icons\BoatMiddle.png" />
-    <Resource Include="Icons\icon.ico" />
     <Resource Include="Icons\BoatSingle.png" />
     <Resource Include="Icons\Water.png" />
     <Resource Include="Icons\Wave.png" />

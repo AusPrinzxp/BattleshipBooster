@@ -3,6 +3,7 @@ using BattleshipBooster.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace BattleshipBooster.Views
@@ -32,12 +33,22 @@ namespace BattleshipBooster.Views
 
                 for (int x = 0; x < playField.Size; x++)
                 {
-                    Image image = new Image();
-                    image.Width = 100;
-                    image.Height = 100;
-                    image.Source = new BitmapImage(new Uri(@$"../Icons/{playField.Fields[x, y].Icon}.png", UriKind.Relative));
+                    Image image = new Image
+					{
+                        Width = 100,
+                        Height = 100,
+                        Source = new BitmapImage(new Uri(@$"../Icons/{playField.Fields[x, y].Icon}.png", UriKind.Relative)),
+                        Opacity = playField.Fields[x, y].IsVisible ? 1 : 0
+					};
 
-                    row.Children.Add(image);
+					Border field = new Border
+					{
+						BorderThickness = new Thickness(1),
+						BorderBrush = Brushes.Gray
+					};
+                    field.Child = image;
+
+                    row.Children.Add(field);
                 }
             }
         }
