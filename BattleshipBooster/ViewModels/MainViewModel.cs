@@ -46,6 +46,7 @@ namespace BattleshipBooster.ViewModels
         public void GenerateNew()
 		{
             PlayField.Fields = generator.Generate(PlayField.Size);
+            PlayField.CalcBoatCounts();
         }
 
         public void Export(Grid grid)

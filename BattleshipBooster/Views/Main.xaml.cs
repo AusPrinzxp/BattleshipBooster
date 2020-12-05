@@ -22,6 +22,7 @@ namespace BattleshipBooster.Views
         private void DrawField()
         {
             PlayField playField = (DataContext as MainViewModel).PlayField;
+            int fieldSize = 100 / playField.Size * 6;
 
             PlayFieldPanel.Children.Clear();
 
@@ -35,8 +36,8 @@ namespace BattleshipBooster.Views
                 {
                     Image image = new Image
 					{
-                        Width = 100,
-                        Height = 100,
+                        Width = fieldSize,
+                        Height = fieldSize,
                         Source = new BitmapImage(new Uri(@$"../Icons/{playField.Fields[x, y].Icon}.png", UriKind.Relative)),
 					};
 
@@ -53,6 +54,43 @@ namespace BattleshipBooster.Views
                     field.Child = image;
 
                     row.Children.Add(field);
+
+                    if (x == (playField.Size -1))
+					{
+                        Label label = new Label
+                        {
+                            Content = playField.RowBoatCounts[y],
+                            FontSize = 20,
+                            Width = 50,
+                            Height = fieldSize,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalContentAlignment = VerticalAlignment.Center
+                        };
+
+                        row.Children.Add(label);
+					}
+                }
+
+                if (y == (playField.Size - 1))
+                {
+                    StackPanel countRow = new StackPanel();
+                    countRow.Orientation = Orientation.Horizontal;
+                    PlayFieldPanel.Children.Add(countRow);
+
+                    for (int x = 0; x < playField.Size; x++)
+					{
+                        Label label = new Label
+                        {
+                            Content = playField.ColumnBoatCounts[x],
+                            FontSize = 20,
+                            Width = fieldSize,
+                            Height = 50,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalContentAlignment = VerticalAlignment.Center
+                        };
+
+                        countRow.Children.Add(label);
+					}
                 }
             }
         }

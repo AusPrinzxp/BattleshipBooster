@@ -50,7 +50,7 @@
             <Button Name="Save" Grid.Row="3" Width="150" Height="50" Click="Save_Click">Save</Button>
         </Grid>
 
-        <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30">
+        <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30" Background="White">
             <StackPanel Name="PlayFieldPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
             </StackPanel>
         </Grid>

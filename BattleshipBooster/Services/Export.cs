@@ -32,7 +32,7 @@ namespace BattleshipBooster.Services
 
             string saveType = isSolution ? "Solution" : "Riddle";
             saveFileDialog.Title = $"Save the {saveType}";
-            saveFileDialog.FileName = $"{saveType}-{playFieldId}";
+			saveFileDialog.FileName = $"{saveType}-{playFieldId}";
 
             saveFileDialog.ShowDialog();
 
