@@ -39,9 +39,16 @@ namespace BattleshipBooster.Services
             PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
 
-            using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
+            try
             {
-                bitmapEncoder.Save(fs);
+                using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
+                {
+                    bitmapEncoder.Save(fs);
+                }
+            }
+            catch
+            {
+                throw new Exception("Saving went wrong");
             }
         }
     }
