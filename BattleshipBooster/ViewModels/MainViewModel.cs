@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace BattleshipBooster.ViewModels
 {
@@ -14,6 +15,7 @@ namespace BattleshipBooster.ViewModels
         // services
         private Generator generator;
         private Export export;
+        private Config config;
 
         private PlayField _playField;
         public PlayField PlayField
@@ -29,10 +31,32 @@ namespace BattleshipBooster.ViewModels
             set => SetProperty(ref _showSolution, value);
 		}
 
-        public MainViewModel(Generator generator, Export export)
+        private int _longBoatCount;
+        public int LongBoatCount
+        {
+            get => _longBoatCount;
+            set => SetProperty(ref _longBoatCount, value);
+        }
+
+        private int _mediumBoatCount;
+        public int MediumBoatCount
+		{
+            get => _mediumBoatCount;
+            set => SetProperty(ref _mediumBoatCount, value);
+		}
+
+        private int _shortBoatCount;
+        public int ShortBoatCount
+		{
+            get => _shortBoatCount;
+            set => SetProperty(ref _shortBoatCount, value);
+		}
+
+        public MainViewModel(Generator generator, Export export, Config config)
         {
             this.generator = generator;
             this.export = export;
+            this.config = config;
             this.ShowSolution = false;
             ResizePlayField(6);
         }
@@ -45,7 +69,12 @@ namespace BattleshipBooster.ViewModels
 
         public void GenerateNew()
 		{
-            PlayField.Fields = generator.Generate(PlayField.Size);
+            PlayFieldConfig playFieldConfig = config.GetPlayFieldConfig(PlayField.Size);
+            LongBoatCount = playFieldConfig.Boats.Where(boat => boat.Length == 3).Count();
+            MediumBoatCount = playFieldConfig.Boats.Where(boat => boat.Length == 2).Count();
+            ShortBoatCount = playFieldConfig.Boats.Where(boat => boat.Length == 1).Count();
+
+            PlayField.Fields = generator.Generate(PlayField.Size, playFieldConfig);
             PlayField.CalcBoatCounts();
         }
 

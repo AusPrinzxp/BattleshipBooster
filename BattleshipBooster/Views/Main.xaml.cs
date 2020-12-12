@@ -22,7 +22,7 @@ namespace BattleshipBooster.Views
         private void DrawField()
         {
             PlayField playField = (DataContext as MainViewModel).PlayField;
-            int fieldSize = 100 / playField.Size * 6;
+            int fieldSize = 80 / playField.Size * 6;
 
             PlayFieldPanel.Children.Clear();
 

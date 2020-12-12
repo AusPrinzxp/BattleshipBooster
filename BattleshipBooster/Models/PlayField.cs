@@ -15,12 +15,15 @@ namespace BattleshipBooster.Models
 
 		public PlayField(int size)
 		{
-			// generate id from current datetime
-			string timeNow = DateTime.Now.ToBinary().ToString();
-			Id = timeNow.Substring(timeNow.Length - 6);
-
+			Id = GenerateId();
 			Size = size;
 			Fields = new Field[size, size];
+		}
+
+		private string GenerateId()
+		{
+			string timeNow = DateTime.Now.ToBinary().ToString();
+			return timeNow.Substring(timeNow.Length - 6);
 		}
 
 		public void CalcBoatCounts()

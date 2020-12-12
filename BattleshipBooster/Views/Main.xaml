@@ -51,7 +51,33 @@
         </Grid>
 
         <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30" Background="White">
-            <StackPanel Name="PlayFieldPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Name="PlayFieldPanel">
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
+                        <Image Source="../Icons/BoatMiddle.png" Height="30" Margin="0 0 5 0"></Image>
+                        <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
+
+                        <Label Content="{Binding LongBoatCount}" Margin="30 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                    </StackPanel>
+                
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
+                        <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
+
+                        <Label Content="{Binding MediumBoatCount}" Margin="65 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                    </StackPanel>
+
+                
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Icons/BoatSingle.png" Height="30"></Image>
+
+                        <Label Content="{Binding ShortBoatCount}" Margin="100 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>
