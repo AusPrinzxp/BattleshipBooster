@@ -8,6 +8,7 @@ namespace BattleshipBooster.Services
 {
 	public class Config : IPlayFieldConfigService
 	{
+		// summary in interface
 		public PlayFieldConfig GetPlayFieldConfig(int size)
 		{
 			return size switch

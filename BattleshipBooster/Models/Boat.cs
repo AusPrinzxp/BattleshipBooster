@@ -13,6 +13,11 @@ namespace BattleshipBooster.Models
 			this.Length = length;
 		}
 
+		/// <summary>
+		/// Places the boat (itself) on the play field
+		/// </summary>
+		/// <param name="fields">Play field to place on</param>
+		/// <param name="placePosition">Start position of boat with x, y and direction (horizontal or vertical)</param>
 		public void Place(Field[,] fields, StartPosition placePosition)
 		{
 			for (int i = 0; i < this.Length; i++)
@@ -25,6 +30,13 @@ namespace BattleshipBooster.Models
 			}
 		}
 
+		/// <summary>
+		/// Sets the name of the correct image to display
+		/// </summary>
+		/// <param name="field">Field to set image</param>
+		/// <param name="isHorizontal">Is the boat oriented horizontally</param>
+		/// <param name="isBoatStart">Is field start tile of the boat</param>
+		/// <param name="isBoatEnd">Is field end tile of the boat</param>
 		private void SetFieldIcon(Field field, bool isHorizontal, bool isBoatStart, bool isBoatEnd)
 		{
 			if (this.Length == 1)

@@ -14,6 +14,7 @@ namespace BattleshipBooster.Services
         private Field[,] fields;
         private int size;
 
+        // summary in interface
         public Field[,] Generate(int size, PlayFieldConfig config)
         {
             this.size = size;
@@ -52,6 +53,11 @@ namespace BattleshipBooster.Services
             return fields;
         }
 
+        /// <summary>
+        /// Inits play field with invisible water fields
+        /// </summary>
+        /// <param name="size">Size of play field</param>
+        /// <returns>Play field</returns>
         private Field[,] InitPlayField(int size)
         {
             Field[,] fields = new Field[size, size];
@@ -70,6 +76,11 @@ namespace BattleshipBooster.Services
             return fields;
         }
 
+        /// <summary>
+        /// Get all possible boat positions of the play field
+        /// </summary>
+        /// <param name="boatLength">Length of the boat to test possible positions</param>
+        /// <returns>All possible start positions (start position and orientation of the boat)</returns>
         private StartPosition[] GetPossibleBoatStartPositions(int boatLength)
         {
             List<StartPosition> positions = new List<StartPosition>();
@@ -103,6 +114,12 @@ namespace BattleshipBooster.Services
             return positions.ToArray();
         }
 
+        /// <summary>
+        /// Checks if the startposition of the boat is possible
+        /// </summary>
+        /// <param name="checkPosition">Start position to check</param>
+        /// <param name="boatLength">Boat length to check</param>
+        /// <returns>If its possible to place boat on this position</returns>
         private bool IsPossiblePosition(StartPosition checkPosition, int boatLength)
         {
             for (int i = 0; i < boatLength; i++)
@@ -120,6 +137,14 @@ namespace BattleshipBooster.Services
             return true;
         }
 
+        /// <summary>
+        /// Checks if the field has no boats around itself (horitontally)
+        /// </summary>
+        /// <param name="x">Field x position</param>
+        /// <param name="y">Fild y position</param>
+        /// <param name="isStart">Is boat start tile</param>
+        /// <param name="isEnd">Is boat end tile</param>
+        /// <returns>Has gaps between boat tile</returns>
         private bool HasGapsHorizontally(int x, int y, bool isStart, bool isEnd)
         {
             if (y < size - 1 && fields[x, y + 1].IsBoat || y > 0 && fields[x, y - 1].IsBoat)
@@ -134,6 +159,14 @@ namespace BattleshipBooster.Services
             return true;
         }
 
+        /// <summary>
+        /// Checks if the field has no boats around itself (vertically)
+        /// </summary>
+        /// <param name="x">Field x position</param>
+        /// <param name="y">Fild y position</param>
+        /// <param name="isStart">Is boat start tile</param>
+        /// <param name="isEnd">Is boat end tile</param>
+        /// <returns>Has gaps between boat tile</returns>
         private bool HasGapsVertically(int x, int y, bool isStart, bool isEnd)
         {
             if (x < size - 1 && fields[x + 1, y].IsBoat || x > 0 && fields[x - 1, y].IsBoat)
@@ -148,6 +181,11 @@ namespace BattleshipBooster.Services
             return true;
         }
 
+        /// <summary>
+        /// Make random fields visible
+        /// </summary>
+        /// <param name="tileCount">How many tiles should be made visible</param>
+        /// <param name="isBoat">Make boat tiles or water tiles visible</param>
         private void MakeTilesVisible(int tileCount, bool isBoat)
 		{
             Field[] tiles = fields.Cast<Field>().Where(field => field.IsBoat == isBoat).ToArray();

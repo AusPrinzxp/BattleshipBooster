@@ -20,12 +20,19 @@ namespace BattleshipBooster.Models
 			Fields = new Field[size, size];
 		}
 
+		/// <summary>
+		/// Generates an id from the current time
+		/// </summary>
+		/// <returns>Generated id</returns>
 		private string GenerateId()
 		{
 			string timeNow = DateTime.Now.ToBinary().ToString();
 			return timeNow.Substring(timeNow.Length - 6);
 		}
 
+		/// <summary>
+		/// Calculates the boat count of each row and column
+		/// </summary>
 		public void CalcBoatCounts()
 		{
 			ColumnBoatCounts = new int[Size];
