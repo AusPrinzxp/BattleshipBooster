@@ -24,8 +24,9 @@ namespace BattleshipBooster
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-			containerRegistry.Register<Services.Generator>();
-			containerRegistry.Register<Services.Export>();
+			containerRegistry.Register<Interfaces.IGeneratorService, Services.Generator>();
+			containerRegistry.Register<Interfaces.IExportService, Services.Export>();
+			containerRegistry.Register<Interfaces.IPlayFieldConfigService, Services.Config>();
 		}
 	}
 }

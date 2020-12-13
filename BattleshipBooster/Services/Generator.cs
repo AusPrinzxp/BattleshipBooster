@@ -1,10 +1,12 @@
-﻿using BattleshipBooster.Models;
+﻿using BattleshipBooster.Interfaces;
+using BattleshipBooster.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BattleshipBooster.Services
 {
-	public class Generator
+	public class Generator: IGeneratorService
 	{
         private const int maxGenerateTryIterations = 10;
         private int generateTryIterations = 0;
@@ -12,12 +14,13 @@ namespace BattleshipBooster.Services
         private Field[,] fields;
         private int size;
 
-        public Field[,] Generate(int size)
+        public Field[,] Generate(int size, PlayFieldConfig config)
         {
             this.size = size;
             fields = InitPlayField(size);
 
-            foreach (Boat boat in GetBoatsFromConfig(size))
+            // place boats from config
+            foreach (Boat boat in config.Boats)
             {
                 StartPosition[] possibleStartPositions = GetPossibleBoatStartPositions(boat.Length);
 
@@ -26,12 +29,13 @@ namespace BattleshipBooster.Services
                     if (generateTryIterations < maxGenerateTryIterations)
 					{
                         generateTryIterations++;
-                        Generate(size);
+                        Generate(size, config);
 					} else
 					{
                         generateTryIterations = 0;
-                        return fields;
 					}
+
+                    return fields;
                 }
                 else
                 {
@@ -39,6 +43,21 @@ namespace BattleshipBooster.Services
                     boat.Place(fields, placePosition);
                 }
             }
+
+            // make tiles visible from config
+            Field[] boatTiles = fields.Cast<Field>().Where(field => field.IsBoat).ToArray();
+            for (int i = 0; i < config.BoatTileShowCount; i++)
+			{
+                Field[] hiddenBoatTiles = boatTiles.Where(tile => !tile.IsVisible).ToArray();
+                hiddenBoatTiles[new Random().Next(hiddenBoatTiles.Length)].IsVisible = true;
+			}
+
+			Field[] waterTiles = fields.Cast<Field>().Where(field => !field.IsBoat).ToArray();
+            for (int i = 0; i < config.WaterTileShowCount; i++)
+            {
+                Field[] hiddenWaterTiles = waterTiles.Where(tile => !tile.IsVisible).ToArray();
+                hiddenWaterTiles[new Random().Next(hiddenWaterTiles.Length)].IsVisible = true;
+			}
 
             generateTryIterations = 0;
             return fields;
@@ -54,25 +73,13 @@ namespace BattleshipBooster.Services
                 {
                     bool isWave = new Random().Next(4) == 0;
                     string icon = isWave ? "Wave" : "Water";
-                    bool isVisible = new Random().Next(6) == 0;
 
-                    fields[col, row] = new Field(icon, isVisible, false);
+                    fields[col, row] = new Field(icon, false, false);
                 }
             }
 
             return fields;
         }
-
-        private Boat[] GetBoatsFromConfig(int size)
-        {
-			return size switch
-			{
-				5 => new Boat[] { new Boat(3), new Boat(2), new Boat(1), new Boat(1) },
-				6 => new Boat[] { new Boat(3), new Boat(2), new Boat(2), new Boat(1), new Boat(1) },
-				7 => new Boat[] { new Boat(3), new Boat(2), new Boat(2), new Boat(2), new Boat(1), new Boat(1), new Boat(1) },
-				_ => new Boat[0],
-			};
-		}
 
         private StartPosition[] GetPossibleBoatStartPositions(int boatLength)
         {
