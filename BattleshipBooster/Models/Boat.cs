@@ -15,49 +15,28 @@ namespace BattleshipBooster.Models
 
 		public void Place(Field[,] fields, StartPosition placePosition)
 		{
-			if (placePosition.IsHorizontal)
-			{
-				PlaceHorizontally(fields, placePosition);
-			} else
-			{
-				PlaceVertically(fields, placePosition);
-			}
-		}
-
-		private void PlaceHorizontally(Field[,] fields, StartPosition placePosition)
-		{
 			for (int i = 0; i < this.Length; i++)
 			{
-				Field field = fields[placePosition.X + i, placePosition.Y];
-				field.IsBoat = true;
+				Field field = placePosition.IsHorizontal ?
+					fields[placePosition.X + i, placePosition.Y] : fields[placePosition.X, placePosition.Y + i];
 
-				SetFieldIcon(field, false, i == 0, i == (this.Length - 1));
+				field.IsBoat = true;
+				SetFieldIcon(field, placePosition.IsHorizontal, i == 0, i == (this.Length - 1));
 			}
 		}
 
-		private void PlaceVertically(Field[,] fields, StartPosition placePosition)
-		{
-			for (int i = 0; i < this.Length; i++)
-			{
-				Field field = fields[placePosition.X, placePosition.Y + i];
-				field.IsBoat = true;
-
-				SetFieldIcon(field, true, i == 0, i == (this.Length -1));
-			}
-		}
-
-		private void SetFieldIcon(Field field, bool isVertical, bool isBoatStart, bool isBoatEnd)
+		private void SetFieldIcon(Field field, bool isHorizontal, bool isBoatStart, bool isBoatEnd)
 		{
 			if (this.Length == 1)
 			{
 				field.Icon = "BoatSingle";
 			}
 			else if (isBoatStart) {
-				field.Icon = isVertical ? "BoatEndUp" : "BoatEndLeft";
+				field.Icon = isHorizontal ? "BoatEndLeft" : "BoatEndUp";
 			}
 			else if (isBoatEnd)
 			{
-				field.Icon = isVertical ? "BoatEndDown" : "BoatEndRight";
+				field.Icon = isHorizontal ? "BoatEndRight" : "BoatEndDown";
 			}
 			else {
 				field.Icon = "BoatMiddle";
