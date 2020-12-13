@@ -31,7 +31,12 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Name="GenerateNew" Grid.Row="0" Width="150" Height="50" Click="GenerateNew_Click">Generate New</Button>
+            <Button Name="GenerateNew" Grid.Row="0" Width="150" Height="50" Click="GenerateNew_Click">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PlusBoxOutline"/>
+                    <TextBlock Text="Generate New" Margin="5 0 0 0"/>
+                </StackPanel>
+            </Button>
 
             <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
                 <Label FontSize="20" HorizontalAlignment="Center" Margin="0 5 0 5">Show solution</Label>
@@ -41,43 +46,66 @@
                 <Label FontSize="20" Margin="0 15 0 10" HorizontalAlignment="Center">Play field size</Label>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="SmallSize" Click="SmallSize_Click">Small</Button>
-                    <Button Name="MeduimSize" Click="MeduimSize_Click">Medium</Button>
-                    <Button Name="LargeSize" Click="LargeSize_Click">Large</Button>
+                    <Button Name="SmallSize" Click="SmallSize_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="SquareOutline"/>
+                            <TextBlock Text="Small" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Name="MeduimSize" Click="MeduimSize_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="GridLarge"/>
+                            <TextBlock Text="Medium" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Name="LargeSize" Click="LargeSize_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Grid"/>
+                            <TextBlock Text="Large" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </StackPanel>
 
-            <Button Name="Save" Grid.Row="3" Width="150" Height="50" Click="Save_Click">Save</Button>
+            <Button Name="Save" Grid.Row="3" Width="150" Height="50" Click="Save_Click">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Download"/>
+                    <TextBlock Text="Save" Margin="5 0 0 0"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <Grid Grid.Column="1" Name="PlayFieldGrid" Margin="30" Background="White">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Name="PlayFieldPanel">
-                </StackPanel>
+                <StackPanel Name="PlayFieldPanel"></StackPanel>
 
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
-                        <Image Source="../Icons/BoatMiddle.png" Height="30" Margin="0 0 5 0"></Image>
-                        <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
+                <materialDesign:Card>
+                    <StackPanel Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
+                            <Image Source="../Icons/BoatMiddle.png" Height="30" Margin="0 0 5 0"></Image>
+                            <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
 
-                        <Label Content="{Binding LongBoatCount}" Margin="30 0 0 0" FontSize="25" FontWeight="Bold"></Label>
-                    </StackPanel>
+                            <Label Content="{Binding LongBoatCount}" Margin="30 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                        </StackPanel>
                 
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
-                        <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Icons/BoatEndLeft.png" Height="30" Margin="0 0 5 0"></Image>
+                            <Image Source="../Icons/BoatEndRight.png" Height="30"></Image>
 
-                        <Label Content="{Binding MediumBoatCount}" Margin="65 0 0 0" FontSize="25" FontWeight="Bold"></Label>
-                    </StackPanel>
+                            <Label Content="{Binding MediumBoatCount}" Margin="65 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                        </StackPanel>
 
                 
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../Icons/BoatSingle.png" Height="30"></Image>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Icons/BoatSingle.png" Height="30"></Image>
 
-                        <Label Content="{Binding ShortBoatCount}" Margin="100 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                            <Label Content="{Binding ShortBoatCount}" Margin="100 0 0 0" FontSize="25" FontWeight="Bold"></Label>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </materialDesign:Card>
             </StackPanel>
         </Grid>
     </Grid>
