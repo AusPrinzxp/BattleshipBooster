@@ -61,12 +61,19 @@ namespace BattleshipBooster.ViewModels
             ResizePlayField(6);
         }
 
+        /// <summary>
+        /// Resizes the play field
+        /// </summary>
+        /// <param name="size">New size</param>
         public void ResizePlayField(int size)
 		{
 			PlayField = new PlayField(size);
             GenerateNew();
         }
 
+        /// <summary>
+        /// Generates a new riddle with the generator service
+        /// </summary>
         public void GenerateNew()
 		{
             PlayFieldConfig playFieldConfig = config.GetPlayFieldConfig(PlayField.Size);
@@ -78,6 +85,10 @@ namespace BattleshipBooster.ViewModels
             PlayField.CalcBoatCounts();
         }
 
+        /// <summary>
+        /// Exports the play field as a PNG file
+        /// </summary>
+        /// <param name="grid">Grid from view to draw PNG</param>
         public void Export(Grid grid)
 		{
             export.SaveAsPNG(grid, ShowSolution, PlayField.Id);

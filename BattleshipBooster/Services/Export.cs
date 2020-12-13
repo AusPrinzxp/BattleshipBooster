@@ -13,6 +13,7 @@ namespace BattleshipBooster.Services
 {
 	public class Export: IExportService
 	{
+        // summary in interface
         public void SaveAsPNG(Grid grid, bool isSolution, string playFieldId)
         {
             RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)Math.Ceiling(grid.ActualWidth), (int)Math.Ceiling(grid.ActualHeight), 96, 96, PixelFormats.Pbgra32);
