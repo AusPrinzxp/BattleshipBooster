@@ -45,19 +45,8 @@ namespace BattleshipBooster.Services
             }
 
             // make tiles visible from config
-            Field[] boatTiles = fields.Cast<Field>().Where(field => field.IsBoat).ToArray();
-            for (int i = 0; i < config.BoatTileShowCount; i++)
-			{
-                Field[] hiddenBoatTiles = boatTiles.Where(tile => !tile.IsVisible).ToArray();
-                hiddenBoatTiles[new Random().Next(hiddenBoatTiles.Length)].IsVisible = true;
-			}
-
-			Field[] waterTiles = fields.Cast<Field>().Where(field => !field.IsBoat).ToArray();
-            for (int i = 0; i < config.WaterTileShowCount; i++)
-            {
-                Field[] hiddenWaterTiles = waterTiles.Where(tile => !tile.IsVisible).ToArray();
-                hiddenWaterTiles[new Random().Next(hiddenWaterTiles.Length)].IsVisible = true;
-			}
+            MakeTilesVisible(config.BoatTileShowCount, true);
+            MakeTilesVisible(config.WaterTileShowCount, false);
 
             generateTryIterations = 0;
             return fields;
@@ -157,6 +146,17 @@ namespace BattleshipBooster.Services
                 return false;
 
             return true;
+        }
+
+        private void MakeTilesVisible(int tileCount, bool isBoat)
+		{
+            Field[] tiles = fields.Cast<Field>().Where(field => field.IsBoat == isBoat).ToArray();
+
+            for (int i = 0; i < tileCount; i++)
+            {
+                Field[] hiddenTiles = tiles.Where(tile => !tile.IsVisible).ToArray();
+				hiddenTiles[new Random().Next(hiddenTiles.Length)].IsVisible = true;
+            }
         }
     }
 }
