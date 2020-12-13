@@ -12,7 +12,7 @@ namespace BattleshipBooster.Models.Tests
         [TestMethod()]
         public void CalcBoatCountsTest()
         {
-            // Arranged
+            // Arrange
             const int size = 3;
             bool boat = false;
             PlayField playField = new PlayField(size);
