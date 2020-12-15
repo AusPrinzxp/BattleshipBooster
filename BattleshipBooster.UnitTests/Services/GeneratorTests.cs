@@ -15,8 +15,8 @@ namespace BattleshipBooster.Services.Tests
         {
             // Arrange
             int size = 6;
-            Generator generator = new Generator();
-            Config config = new Config();
+            GeneratorService generator = new GeneratorService();
+            PlayFieldConfigService config = new PlayFieldConfigService();
             Field[,] fields = new Field[size, size];
 
             // Act

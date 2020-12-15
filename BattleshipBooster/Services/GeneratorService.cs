@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BattleshipBooster.Services
 {
-	public class Generator: IGeneratorService
+	public class GeneratorService: IGeneratorService
 	{
         private const int maxGenerateTryIterations = 10;
         private int generateTryIterations = 0;

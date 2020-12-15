@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BattleshipBooster.Services
 {
-	public class Config : IPlayFieldConfigService
+	public class PlayFieldConfigService : IPlayFieldConfigService
 	{
 		// summary in interface
 		public PlayFieldConfig GetPlayFieldConfig(int size)

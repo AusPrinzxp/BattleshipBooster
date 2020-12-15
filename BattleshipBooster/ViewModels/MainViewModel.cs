@@ -13,9 +13,9 @@ namespace BattleshipBooster.ViewModels
 	public class MainViewModel : BindableBase
     {
         // services
-        private Generator generator;
-        private Export export;
-        private Config config;
+        private GeneratorService generator;
+        private ExportService export;
+        private PlayFieldConfigService config;
 
         private PlayField _playField;
         public PlayField PlayField
@@ -52,7 +52,7 @@ namespace BattleshipBooster.ViewModels
             set => SetProperty(ref _shortBoatCount, value);
 		}
 
-        public MainViewModel(Generator generator, Export export, Config config)
+        public MainViewModel(GeneratorService generator, ExportService export, PlayFieldConfigService config)
         {
             this.generator = generator;
             this.export = export;

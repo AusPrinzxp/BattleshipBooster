@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace BattleshipBooster.Services
 {
-	public class Export: IExportService
+	public class ExportService: IExportService
 	{
         // summary in interface
         public void SaveAsPNG(Grid grid, bool isSolution, string playFieldId)

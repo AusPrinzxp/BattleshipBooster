@@ -16,9 +16,9 @@ namespace BattleshipBooster.ViewModels.Tests
         public void MainViewModelTest()
         {
             // Arrange
-            Generator generator = new Generator();
-            Export export = new Export();
-            Config config = new Config();
+            GeneratorService generator = new GeneratorService();
+            ExportService export = new ExportService();
+            PlayFieldConfigService config = new PlayFieldConfigService();
 
             // Act
             MainViewModel mainViewModel = new MainViewModel(generator, export, config); ;
@@ -34,9 +34,9 @@ namespace BattleshipBooster.ViewModels.Tests
         {
             // Arrange
             int size = 5;
-            Generator generator = new Generator();
-            Export export = new Export();
-            Config config = new Config();
+            GeneratorService generator = new GeneratorService();
+            ExportService export = new ExportService();
+            PlayFieldConfigService config = new PlayFieldConfigService();
             MainViewModel mainViewModel = new MainViewModel(generator, export, config);
 
             // Act
@@ -52,9 +52,9 @@ namespace BattleshipBooster.ViewModels.Tests
         {
             // Arrange
             int size = 7;
-            Generator generator = new Generator();
-            Export export = new Export();
-            Config config = new Config();
+            GeneratorService generator = new GeneratorService();
+            ExportService export = new ExportService();
+            PlayFieldConfigService config = new PlayFieldConfigService();
             MainViewModel mainViewModel = new MainViewModel(generator, export, config);
             mainViewModel.PlayField = new PlayField(7);
 
