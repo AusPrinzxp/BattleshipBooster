@@ -26,7 +26,7 @@ namespace BattleshipBooster.Models
 					fields[placePosition.X + i, placePosition.Y] : fields[placePosition.X, placePosition.Y + i];
 
 				field.IsBoat = true;
-				SetFieldIcon(field, placePosition.IsHorizontal, i == 0, i == (this.Length - 1));
+				field.Icon = GetFieldIcon(placePosition.IsHorizontal, i == 0, i == (this.Length - 1));
 			}
 		}
 
@@ -37,21 +37,21 @@ namespace BattleshipBooster.Models
 		/// <param name="isHorizontal">Is the boat oriented horizontally</param>
 		/// <param name="isBoatStart">Is field start tile of the boat</param>
 		/// <param name="isBoatEnd">Is field end tile of the boat</param>
-		private void SetFieldIcon(Field field, bool isHorizontal, bool isBoatStart, bool isBoatEnd)
+		private string GetFieldIcon(bool isHorizontal, bool isBoatStart, bool isBoatEnd)
 		{
 			if (this.Length == 1)
 			{
-				field.Icon = "BoatSingle";
+				return "BoatSingle";
 			}
 			else if (isBoatStart) {
-				field.Icon = isHorizontal ? "BoatEndLeft" : "BoatEndUp";
+				return isHorizontal ? "BoatEndLeft" : "BoatEndUp";
 			}
 			else if (isBoatEnd)
 			{
-				field.Icon = isHorizontal ? "BoatEndRight" : "BoatEndDown";
+				return isHorizontal ? "BoatEndRight" : "BoatEndDown";
 			}
 			else {
-				field.Icon = "BoatMiddle";
+				return "BoatMiddle";
 			}
 		}
 	}
