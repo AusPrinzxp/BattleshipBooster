@@ -16,6 +16,7 @@
     <None Remove="Icons\BoatSingle.png" />
     <None Remove="Icons\Water.png" />
     <None Remove="Icons\Wave.png" />
+    <None Remove="Services\Generator.cs~RF115c563e.TMP" />
     <None Remove="Views\Main.xaml.cs~RF378b2513.TMP" />
     <None Remove="Views\Main.xaml.cs~RF3796cf86.TMP" />
   </ItemGroup>
