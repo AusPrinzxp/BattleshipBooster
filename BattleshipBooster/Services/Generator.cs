@@ -18,7 +18,7 @@ namespace BattleshipBooster.Services
         public Field[,] Generate(int size, PlayFieldConfig config)
         {
             this.size = size;
-            fields = InitPlayField(size);
+            fields = InitPlayField();
 
             // place boats from config
             foreach (Boat boat in config.Boats)
@@ -58,7 +58,7 @@ namespace BattleshipBooster.Services
         /// </summary>
         /// <param name="size">Size of play field</param>
         /// <returns>Play field</returns>
-        private Field[,] InitPlayField(int size)
+        private Field[,] InitPlayField()
         {
             Field[,] fields = new Field[size, size];
 
